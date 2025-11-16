@@ -14,3 +14,5 @@ router.get("/", getTasks);
 router.get("/", createTask);
 router.get("/:id", updateTask);
 router.get("/:id", deleteTask);
+
+export default router;
