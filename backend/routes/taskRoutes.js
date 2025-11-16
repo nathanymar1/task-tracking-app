@@ -11,8 +11,8 @@ const router = express.Router();
 
 router.get("/:id", getTask);
 router.get("/", getTasks);
-router.get("/", createTask);
-router.get("/:id", updateTask);
-router.get("/:id", deleteTask);
+router.post("/", createTask);
+router.put("/:id", updateTask);
+router.delete("/:id", deleteTask);
 
 export default router;
