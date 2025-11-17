@@ -1,5 +1,11 @@
 import React from "react";
 
 export function CalendarPage() {
-  return <div>CalendarPage</div>;
+  return (
+    <>
+      <title>Calendar</title>
+
+      <div>CalendarPage</div>
+    </>
+  );
 }

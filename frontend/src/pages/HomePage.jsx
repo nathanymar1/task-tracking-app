@@ -1,5 +1,10 @@
 import React from "react";
 
 export function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <title>Home</title>
+      <div>HomePage</div>
+    </>
+  );
 }
