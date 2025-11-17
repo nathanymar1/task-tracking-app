@@ -1,24 +1,28 @@
 import { sql } from "../db/pg.js";
 
-export const getTask = async (req, res) => {
+export const getSession = async (req, res) => {
   try {
-    const { task_id } = req.params;
-    const result = await sql`SELECT * FROM tasks WHERE task_id = ${task_id}`;
+    const { task_id, session_id } = req.params;
+    const result = await sql`
+      SELECT *
+      FROM sessions
+      WHERE task_id=${task_id} AND session_id=${session_id}
+    `;
 
     if (result.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "Task not found."
+        message: "Session not found."
       });
     }
 
     res.status(200).json({
       success: true,
       data: result[0],
-      message: "Successfully fetched task."
+      message: "Successfully fetched session."
     });
   } catch (error) {
-    console.error("getTask error:", error);
+    console.error("getSession error:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error."
@@ -26,19 +30,22 @@ export const getTask = async (req, res) => {
   }
 };
 
-export const getTasks = async (req, res) => {
+export const getSessions = async (req, res) => {
   try {
+    const { task_id } = req.params;
     const result = await sql`
-    SELECT * FROM tasks
-    ORDER BY created_at DESC
+      SELECT *
+      FROM sessions
+      WHERE task_id = ${task_id}
     `;
+
     res.status(200).json({
       success: true,
       data: result,
-      message: "Fetched all tasks successfully."
+      message: "Successfully fetched sessions."
     });
   } catch (error) {
-    console.error("getTasks error:", error);
+    console.error("getSessions error:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error."
@@ -46,21 +53,22 @@ export const getTasks = async (req, res) => {
   }
 };
 
-export const createTask = async (req, res) => {
+export const createSession = async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { task_id } = req.params;
     const result = await sql`
-      INSERT INTO tasks (name, description)
-      VALUES (${name}, ${description})
+      INSERT INTO sessions (task_id, session_start)
+      VALUES (${task_id}, NOW())
       RETURNING *
     `;
+
     res.status(201).json({
       success: true,
       data: result[0],
-      message: "Created a new task successfully."
+      message: "Successfully created session."
     });
   } catch (error) {
-    console.error("createTask error:", error);
+    console.error("createSession error:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error."
@@ -68,31 +76,30 @@ export const createTask = async (req, res) => {
   }
 };
 
-export const updateTask = async (req, res) => {
+export const updateSession = async (req, res) => {
   try {
-    const { task_id } = req.params;
-    const { name, description } = req.body;
+    const { task_id, session_id } = req.params;
     const result = await sql`
-      UPDATE tasks
-      SET name=${name}, description=${description}
-      WHERE task_id = ${task_id}
+      UPDATE sessions
+      SET session_end = NOW()
+      WHERE task_id=${task_id} AND session_id=${session_id}
       RETURNING *
     `;
 
     if (result.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "Task not found"
+        message: "Task or session not found."
       });
     }
 
     res.status(200).json({
       success: true,
       data: result[0],
-      message: "Task successfully updated"
+      message: "Successfully updated session."
     });
   } catch (error) {
-    console.error("updateTask error:", error);
+    console.error("updateSession error:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error."
@@ -100,29 +107,29 @@ export const updateTask = async (req, res) => {
   }
 };
 
-export const deleteTask = async (req, res) => {
+export const deleteSession = async (req, res) => {
   try {
-    const { task_id } = req.params;
+    const { task_id, session_id } = req.params;
     const result = await sql`
-      DELETE FROM tasks
-      WHERE task_id = ${task_id}
+      DELETE FROM sessions
+      WHERE task_id = ${task_id} AND session_id = ${session_id}
       RETURNING *
     `;
 
     if (result.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "Task not found."
+        message: "Task or session not found."
       });
     }
 
     res.status(200).json({
       success: true,
       data: result[0],
-      message: "Task successfully deleted"
+      message: "Successfully deleted session."
     });
   } catch (error) {
-    console.error("deleteTask error:", error);
+    console.error("deleteSession error:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error."
