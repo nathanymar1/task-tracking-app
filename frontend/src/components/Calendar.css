@@ -1,5 +1,5 @@
 .calendar {
   flex: 1;
-  padding-top: 20px;
-  padding-right: 100px;
+  padding-top: 50px;
+  justify-content: center;
 }
