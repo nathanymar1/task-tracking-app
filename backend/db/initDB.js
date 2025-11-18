@@ -5,6 +5,7 @@ export async function initDB() {
     await sql`
       CREATE TABLE IF NOT EXISTS tasks (
         task_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        date DATE DEFAULT CURRENT_DATE,
         name VARCHAR(255) NOT NULL,
         description TEXT DEFAULT '',
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
