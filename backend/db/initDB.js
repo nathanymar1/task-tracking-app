@@ -5,7 +5,7 @@ export async function initDB() {
     await sql`
       CREATE TABLE IF NOT EXISTS tasks (
         task_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        date DATE DEFAULT CURRENT_DATE,
+        date TEXT NOT NULL,
         name VARCHAR(255) NOT NULL,
         description TEXT DEFAULT '',
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
@@ -14,7 +14,7 @@ export async function initDB() {
     await sql`
       CREATE TABLE IF NOT EXISTS sessions (
         session_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        task_id INT REFERENCES tasks(task_id),
+        task_id INT REFERENCES tasks(task_id) ON DELETE CASCADE,
         session_start TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         session_end TIMESTAMPTZ
       )
