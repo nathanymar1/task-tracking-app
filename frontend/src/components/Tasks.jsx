@@ -10,7 +10,6 @@ export function Tasks() {
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/api/tasks");
-      console.log(response.data.data);
       setTasks(response.data.data);
     }
 
