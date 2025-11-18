@@ -1,9 +1,27 @@
 import "./tasks.css";
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+import { Task } from "./Task";
 
 export function Tasks() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await axios.get("/api/tasks");
+      console.log(response.data.data);
+      setTasks(response.data.data);
+    }
+
+    getData();
+  }, []);
+
   return (
     <div className="task-container">
-      <h1>Tasks</h1>
+      {tasks.map((task) => {
+        return <Task key={task.task_id} task={task} />;
+      })}
     </div>
   );
 }

@@ -9,7 +9,12 @@ export function Calendar() {
 
   return (
     <div className="calendar">
-      <DatePicker value={date} onChange={setDate} size="xl" />
+      <DatePicker
+        value={date}
+        onChange={setDate}
+        size="xl"
+        firstDayOfWeek={0}
+      />
     </div>
   );
 }
