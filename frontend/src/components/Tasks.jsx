@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useEffect, useState } from "react";
 import { Task } from "./Task";
+import { Header } from "./Header";
 
 export function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -17,10 +18,13 @@ export function Tasks() {
   }, []);
 
   return (
-    <div className="task-container">
-      {tasks.map((task) => {
-        return <Task key={task.task_id} task={task} />;
-      })}
-    </div>
+    <>
+      <Header />
+      <div className="tasks-grid">
+        {tasks.map((task) => {
+          return <Task key={task.task_id} task={task} />;
+        })}
+      </div>
+    </>
   );
 }
