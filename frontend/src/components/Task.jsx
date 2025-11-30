@@ -1,8 +1,8 @@
 import { PauseCircleIcon } from "../assets/PauseCircleIcon";
 import { PlayCircleIcon } from "../assets/PlayCircleIcon";
 import { EllipsisVerticalIcon } from "../assets/EllipsisVerticalIcon";
-import { Menu, Button } from "@mantine/core";
 import { useState } from "react";
+import { TaskTime } from "./TaskTime";
 
 export function Task({ task }) {
   const [play, setPlay] = useState(false);
@@ -15,7 +15,7 @@ export function Task({ task }) {
         ) : (
           <div className="flex items-center gap-2">
             <PlayCircleIcon />
-            03:40
+            <TaskTime task={task} />
           </div>
         )}
       </button>
