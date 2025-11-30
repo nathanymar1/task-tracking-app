@@ -21,5 +21,5 @@ export function Header() {
     };
   }, []);
 
-  return <div>{greetingMessage(time)}</div>;
+  return <div className="header">{greetingMessage(time)}</div>;
 }

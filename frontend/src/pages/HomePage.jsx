@@ -1,5 +1,6 @@
 import React from "react";
 import { Tasks } from "../components/Tasks";
+import { Header } from "../components/Header";
 
 import "./HomePage.css";
 
@@ -9,6 +10,7 @@ export function HomePage() {
       <title>Home</title>
 
       <div className="home-container">
+        <Header />
         <Tasks />
       </div>
     </div>

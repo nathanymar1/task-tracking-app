@@ -19,7 +19,6 @@ export function Tasks() {
 
   return (
     <>
-      <Header />
       <div className="tasks-grid">
         {tasks.map((task) => {
           return <Task key={task.task_id} task={task} />;
