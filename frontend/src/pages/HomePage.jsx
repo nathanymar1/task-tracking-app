@@ -9,8 +9,9 @@ export function HomePage() {
     <div className="bg-white">
       <title>Home</title>
 
-      <div className="home-container">
+      <div className="h-screen flex flex-col items-center">
         <Header />
+
         <Tasks />
       </div>
     </div>
