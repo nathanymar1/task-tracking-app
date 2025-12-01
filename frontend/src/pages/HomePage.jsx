@@ -1,4 +1,4 @@
-import { Tasks } from "../components/Tasks";
+import { Tasks } from "../components/TasksGrid";
 import { Header } from "../components/Header";
 
 import "./HomePage.css";

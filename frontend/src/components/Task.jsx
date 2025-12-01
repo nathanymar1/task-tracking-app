@@ -6,7 +6,7 @@ import { useState } from "react";
 import { TaskTime } from "./TaskTime";
 import { EditDeleteMenu } from "./EditDeleteMenu";
 
-export function Task({ task }) {
+export function Task({ task, setTasks, tasks }) {
   const [play, setPlay] = useState(false);
 
   async function startSession() {
@@ -56,7 +56,7 @@ export function Task({ task }) {
             </>
           )}
         </button>
-        <EditDeleteMenu />
+        <EditDeleteMenu task={task} setTasks={setTasks} tasks={tasks} />
       </div>
       <div className="flex flex-col justify-start h-20">
         <p className="text-lg font-semibold text-left truncate">{task.name}</p>

@@ -20,7 +20,14 @@ export function Tasks() {
     <>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5">
         {tasks.map((task) => {
-          return <Task key={task.task_id} task={task} />;
+          return (
+            <Task
+              key={task.task_id}
+              task={task}
+              setTasks={setTasks}
+              tasks={tasks}
+            />
+          );
         })}
       </div>
     </>
