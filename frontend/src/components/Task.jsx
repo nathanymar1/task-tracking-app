@@ -58,10 +58,12 @@ export function Task({ task }) {
         </button>
         <EditDeleteMenu />
       </div>
-      <p className="text-lg font-semibold text-left truncate">{task.name}</p>
-      <p className="text-left text-sm text-gray-600 line-clamp-2">
-        {task.description}
-      </p>
+      <div className="flex flex-col justify-start h-20">
+        <p className="text-lg font-semibold text-left truncate">{task.name}</p>
+        <p className="text-left text-sm text-gray-600 line-clamp-2">
+          {task.description}
+        </p>
+      </div>
     </div>
   );
 }

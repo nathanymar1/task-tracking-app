@@ -33,11 +33,16 @@ export function TaskTime({ task, play }) {
   const seconds = Math.floor(totalTime % 60);
 
   // add leading zeroes if necessary
-  const formattedHours = String(hours).padStart(2, "0");
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(seconds).padStart(2, "0");
+  // const formattedHours = String(hours).padStart(2, "0");
+  // const formattedMinutes = String(minutes).padStart(2, "0");
+  // const formattedSeconds = String(seconds).padStart(2, "0");
+  // {`${formattedHours}:${formattedMinutes}:${formattedSeconds}`}
+
+  const formattedHours = hours > 0 ? `${hours}h` : "";
+  const formattedMinutes = minutes > 0 ? `${minutes}m` : "";
+  const formattedSeconds = seconds > 0 ? `${seconds}s` : "";
 
   return (
-    <div>{`${formattedHours}:${formattedMinutes}:${formattedSeconds}`}</div>
+    <div>{`${formattedHours} ${formattedMinutes} ${formattedSeconds}`}</div>
   );
 }
