@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export function TaskTime({ task }) {
+export function TaskTime({ task, play }) {
   const [totalTime, setTotalTime] = useState(0);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function TaskTime({ task }) {
     };
 
     calculateTotalTime();
-  }, [task.task_id]);
+  }, [task.task_id, play]);
 
   const hours = Math.floor(totalTime / 3600);
   const minutes = Math.floor((totalTime % 3600) / 60);

@@ -1,35 +1,5 @@
 import { sql } from "../db/pg.js";
 
-export const getSession = async (req, res) => {
-  try {
-    const { task_id, session_id } = req.params;
-    const result = await sql`
-      SELECT *
-      FROM sessions
-      WHERE task_id=${task_id} AND session_id=${session_id}
-    `;
-
-    if (result.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Session not found."
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: result[0],
-      message: "Successfully fetched session."
-    });
-  } catch (error) {
-    console.error("getSession error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Internal server error."
-    });
-  }
-};
-
 export const getSessions = async (req, res) => {
   try {
     const { task_id } = req.params;
@@ -53,7 +23,7 @@ export const getSessions = async (req, res) => {
   }
 };
 
-export const createSession = async (req, res) => {
+export const startSession = async (req, res) => {
   try {
     const { task_id } = req.params;
     const result = await sql`
@@ -65,7 +35,7 @@ export const createSession = async (req, res) => {
     res.status(201).json({
       success: true,
       data: result[0],
-      message: "Successfully created session."
+      message: "Successfully started session."
     });
   } catch (error) {
     console.error("createSession error:", error);
@@ -76,27 +46,27 @@ export const createSession = async (req, res) => {
   }
 };
 
-export const updateSession = async (req, res) => {
+export const stopSession = async (req, res) => {
   try {
-    const { task_id, session_id } = req.params;
+    const { task_id } = req.params;
     const result = await sql`
       UPDATE sessions
       SET session_end = NOW()
-      WHERE task_id=${task_id} AND session_id=${session_id}
+      WHERE task_id=${task_id} AND session_end IS NULL
       RETURNING *
     `;
 
     if (result.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "Task or session not found."
+        message: "No running session found."
       });
     }
 
     res.status(200).json({
       success: true,
       data: result[0],
-      message: "Successfully updated session."
+      message: "Successfully stopped session."
     });
   } catch (error) {
     console.error("updateSession error:", error);
