@@ -21,5 +21,11 @@ export function Header() {
     };
   }, []);
 
-  return <div className="header">{greetingMessage(time)}</div>;
+  return (
+    <header className="py-4">
+      <p className="text-left text-2xl font-semibold">
+        {greetingMessage(time)}
+      </p>
+    </header>
+  );
 }

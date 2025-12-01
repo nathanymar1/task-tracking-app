@@ -2,9 +2,9 @@ import axios from "axios";
 
 import { PauseCircleIcon } from "../assets/PauseCircleIcon";
 import { PlayCircleIcon } from "../assets/PlayCircleIcon";
-import { EllipsisVerticalIcon } from "../assets/EllipsisVerticalIcon";
 import { useState } from "react";
 import { TaskTime } from "./TaskTime";
+import { EditDeleteMenu } from "./EditDeleteMenu";
 
 export function Task({ task }) {
   const [play, setPlay] = useState(false);
@@ -37,8 +37,12 @@ export function Task({ task }) {
   }
 
   return (
-    <div className="p-4 rounded-xl shadow-md bg-white flex flex-col gap-3">
-      <div className="flex items-center justify-between">
+    <div
+      className={`p-4 border rounded-xl shadow-md flex flex-col justify-between h-40 bg-white ${
+        play ? "border-lime-500" : "border-transparent"
+      }`}
+    >
+      <div className="flex justify-between items-start">
         <button className="flex items-center gap-2" onClick={togglePlay}>
           {play ? (
             <>
@@ -52,12 +56,12 @@ export function Task({ task }) {
             </>
           )}
         </button>
-        <button className="col-span-2 flex justify-end">
-          <EllipsisVerticalIcon className="w-7 h-7" />
-        </button>
+        <EditDeleteMenu />
       </div>
-      <p className="text-lg font-bold text-left">{task.name}</p>
-      <p className="text-left text-sm text-gray-600">{task.description}</p>
+      <p className="text-lg font-semibold text-left truncate">{task.name}</p>
+      <p className="text-left text-sm text-gray-600 line-clamp-2">
+        {task.description}
+      </p>
     </div>
   );
 }
