@@ -1,12 +1,9 @@
 import axios from "axios";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Task } from "./Task";
-import { Header } from "./Header";
 
-export function Tasks() {
-  const [tasks, setTasks] = useState([]);
-
+export function Tasks({ tasks, setTasks }) {
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/api/tasks");
@@ -14,7 +11,7 @@ export function Tasks() {
     }
 
     getData();
-  }, []);
+  }, [setTasks]);
 
   return (
     <>

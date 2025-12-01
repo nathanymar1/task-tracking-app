@@ -43,7 +43,10 @@ export function Task({ task, setTasks, tasks }) {
       }`}
     >
       <div className="flex justify-between items-start">
-        <button className="flex items-center gap-2" onClick={togglePlay}>
+        <button
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={togglePlay}
+        >
           {play ? (
             <>
               <PauseCircleIcon className="w-7 h-7" />

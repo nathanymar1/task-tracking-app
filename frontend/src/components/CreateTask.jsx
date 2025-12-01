@@ -1,0 +1,89 @@
+import axios from "axios";
+import { useState } from "react";
+
+export function CreateTask({ tasks, setTasks }) {
+  const [openCreate, setOpenCreate] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+  const [descriptionInput, setDescriptionInput] = useState("");
+
+  const toggleCreate = () => {
+    setOpenCreate(!openCreate);
+  };
+
+  const handleNameInput = (event) => {
+    setNameInput(event.target.value);
+  };
+
+  const handleDescriptionInput = (event) => {
+    setDescriptionInput(event.target.value);
+  };
+
+  const createTask = async () => {
+    try {
+      const response = await axios.post("/api/tasks", {
+        name: nameInput,
+        description: descriptionInput
+      });
+
+      const newTask = response.data.data;
+
+      // update UI, reset fields
+      setTasks([newTask, ...tasks]);
+      setOpenCreate(false);
+      setNameInput("");
+      setDescriptionInput("");
+
+      console.log("Task created successfully.");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="relative transition-opacity duration-150">
+      <button
+        className="bg-orange-400 text-white h-10 px-4 rounded-md hover:bg-orange-500 shadow-sm cursor-pointer"
+        onClick={toggleCreate}
+      >
+        + New Task
+      </button>
+      {openCreate && (
+        <>
+          <div className="fixed inset-0 bg-black opacity-10 z-40" />
+          <div className="absolute right-0 mt-3 shadow-md p-3 rounded-md border border-amber-500 bg-white z-50">
+            <input
+              className="p-1 border border-gray-200 shadow-sm mb-2 rounded-md w-full"
+              placeholder="Add name"
+              type="text"
+              value={nameInput}
+              onChange={handleNameInput}
+            />
+            <textarea
+              className="p-1 border border-gray-200 shadow-sm rounded-md w-full"
+              placeholder="Add description"
+              type="text"
+              value={descriptionInput}
+              onChange={handleDescriptionInput}
+            />
+            <div className="flex justify-center items-center w-full max-w-3xl mt-2 mx-2 gap-16">
+              <button
+                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-gray-100"
+                onClick={createTask}
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  setOpenCreate(false);
+                }}
+                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

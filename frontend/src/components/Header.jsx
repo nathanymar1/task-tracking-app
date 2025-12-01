@@ -23,7 +23,7 @@ export function Header() {
 
   return (
     <header className="py-4">
-      <p className="text-left text-2xl font-semibold">
+      <p className="text-left text-4xl font-semibold ">
         {greetingMessage(time)}
       </p>
     </header>

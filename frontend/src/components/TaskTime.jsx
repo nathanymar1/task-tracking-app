@@ -43,6 +43,10 @@ export function TaskTime({ task, play }) {
   const formattedSeconds = seconds > 0 ? `${seconds}s` : "";
 
   return (
-    <div>{`${formattedHours} ${formattedMinutes} ${formattedSeconds}`}</div>
+    <div>
+      {totalTime === 0
+        ? "START"
+        : `${formattedHours} ${formattedMinutes} ${formattedSeconds}`}
+    </div>
   );
 }
