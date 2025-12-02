@@ -1,4 +1,6 @@
 import axios from "axios";
+import { XIcon } from "../assets/XIcon";
+import { CheckIcon } from "../assets/CheckIcon";
 import { PlusIcon } from "../assets/PlusIcon";
 import { useState } from "react";
 
@@ -52,7 +54,7 @@ export function CreateTask({ tasks, setTasks }) {
       {openCreate && (
         <>
           <div className="fixed inset-0 bg-black opacity-10 z-40" />
-          <div className="absolute right-0 mt-3 shadow-md p-3 rounded-md border border-amber-500 bg-white z-50">
+          <div className="absolute right-0 mt-3 shadow-md p-3 rounded-md border border-amber-500 bg-white z-50 w-80 max-w-sm">
             <input
               className="p-1 border border-gray-200 shadow-sm mb-2 rounded-md w-full"
               placeholder="Add name"
@@ -67,20 +69,20 @@ export function CreateTask({ tasks, setTasks }) {
               value={descriptionInput}
               onChange={handleDescriptionInput}
             />
-            <div className="flex justify-center items-center w-full max-w-3xl mt-2 mx-2 gap-16">
+            <div className="flex justify-end items-center w-full max-w-3xl mt-2 mx-2 gap-2">
               <button
-                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-gray-100"
+                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-green-200"
                 onClick={createTask}
               >
-                Save
+                <CheckIcon />
               </button>
               <button
                 onClick={() => {
                   setOpenCreate(false);
                 }}
-                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-gray-100"
+                className="cursor-pointer shadow-sm rounded-md p-1 hover:bg-red-200"
               >
-                Cancel
+                <XIcon />
               </button>
             </div>
           </div>

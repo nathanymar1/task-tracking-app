@@ -31,7 +31,7 @@ export function TaskActions({
     <div className="mt-1 flex justify-end gap-2">
       {isEditing ? (
         <button
-          className="p-1 cursor-pointer rounded-md hover:bg-green-200"
+          className="p-1 cursor-pointer rounded-md hover:bg-green-200 shadow-sm"
           onClick={editTask}
         >
           <CheckIcon className="w-6 h-6" />
@@ -41,7 +41,7 @@ export function TaskActions({
       )}
       {isEditing ? (
         <button
-          className="p-1 cursor-pointer rounded-md hover:bg-red-200"
+          className="p-1 cursor-pointer rounded-md hover:bg-red-200 shadow-sm"
           onClick={() => {
             setIsEditing(false);
           }}
