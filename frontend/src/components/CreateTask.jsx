@@ -1,4 +1,5 @@
 import axios from "axios";
+import { PlusIcon } from "../assets/PlusIcon";
 import { useState } from "react";
 
 export function CreateTask({ tasks, setTasks }) {
@@ -42,10 +43,11 @@ export function CreateTask({ tasks, setTasks }) {
   return (
     <div className="relative transition-opacity duration-150">
       <button
-        className="bg-orange-400 text-white h-10 px-4 rounded-md hover:bg-orange-500 shadow-sm cursor-pointer"
+        className="bg-orange-400 text-white h-10 px-3 rounded-md hover:bg-orange-500 shadow-sm cursor-pointer flex items-center gap-1"
         onClick={toggleCreate}
       >
-        + New Task
+        <PlusIcon className="h-6 w-6" />
+        <p>New Task</p>
       </button>
       {openCreate && (
         <>

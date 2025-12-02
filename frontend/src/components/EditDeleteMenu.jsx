@@ -3,7 +3,7 @@ import axios from "axios";
 import { EllipsisVerticalIcon } from "../assets/EllipsisVerticalIcon";
 import { useState, useRef, useEffect } from "react";
 
-export function EditDeleteMenu({ task, setTasks, tasks }) {
+export function EditDeleteMenu({ task, setTasks, tasks, setIsEditing }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -26,6 +26,11 @@ export function EditDeleteMenu({ task, setTasks, tasks }) {
     };
   }, []);
 
+  const toggleEdit = () => {
+    setOpen(false);
+    setIsEditing(true);
+  };
+
   const deleteTask = async () => {
     try {
       await axios.delete(`/api/tasks/${task.task_id}`);
@@ -43,7 +48,10 @@ export function EditDeleteMenu({ task, setTasks, tasks }) {
       </button>
       {open && (
         <div className="absolute top-full mt-2 z-50 bg-white shadow-md rounded-md overflow-hidden">
-          <button className="block border w-full p-2 text-left bg-white hover:bg-gray-200 border-b-gray-200 border-t-transparent border-x-transparent cursor-pointer">
+          <button
+            className="block border w-full p-2 text-left bg-white hover:bg-gray-200 border-b-gray-200 border-t-transparent border-x-transparent cursor-pointer"
+            onClick={toggleEdit}
+          >
             Edit
           </button>
           <button
