@@ -3,15 +3,16 @@ import axios from "axios";
 import { useEffect } from "react";
 import { Task } from "./Task";
 
-export function Tasks({ tasks, setTasks }) {
+export function TasksGrid({ tasks, setTasks, displayedDate }) {
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/api/tasks");
+      const formattedDate = displayedDate.format("YYYY-MM-DD");
+      const response = await axios.get(`/api/tasks?date=${formattedDate}`);
       setTasks(response.data.data);
     }
 
     getData();
-  }, [setTasks]);
+  }, [setTasks, displayedDate]);
 
   return (
     <>

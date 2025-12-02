@@ -1,17 +1,18 @@
-import { DatePickerInput } from "@mantine/dates";
+import dayjs from "dayjs";
+
 import "@mantine/dates/styles.css";
+import { DatePickerInput } from "@mantine/dates";
 import { CreateTask } from "./CreateTask";
-import { useState } from "react";
 
-export function ToolBar({ tasks, setTasks }) {
-  const [displayedDate, setDisplayedDate] = useState(new Date());
-
+export function ToolBar({ tasks, setTasks, displayedDate, setDisplayedDate }) {
   return (
     <div className="flex justify-between items-center w-full max-w-3xl mt-4 mb-6">
       <DatePickerInput
-        value={displayedDate}
-        onChange={setDisplayedDate}
-        weekendDays
+        value={displayedDate.toDate()}
+        onChange={(value) => {
+          setDisplayedDate(dayjs(value));
+        }}
+        firstDayOfWeek={0}
         styles={{
           input: {
             height: "40px",

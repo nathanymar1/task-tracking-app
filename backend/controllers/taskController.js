@@ -37,7 +37,7 @@ export const getTasks = async (req, res) => {
     if (date) {
       result = await sql`
         SELECT * FROM tasks
-        WHERE date = ${date}
+        WHERE date = ${cleanDate}
         ORDER BY created_at DESC
       `;
     } else {
