@@ -19,6 +19,6 @@ The backend is implemented as a *RESTful API* using **Express** and connected to
 </div>
 
 ## Acknowledgements:
-Neon (https://neon.com/) - Hosts PostgreSQL database
-heroicons (https://heroicons.com/outline) - Provided icons used in Task Tracking Application
-Devicon (https://devicon.dev/) - Provided icons for this README.md
+- [Neon](https://neon.com/) - Hosts PostgreSQL database 
+- [heroicons](https://heroicons.com/outline) - Provided icons used in Task Tracking Application
+- [Devicon](https://devicon.dev/) - Provided icons for this README.md
