@@ -4,6 +4,9 @@ This **Task Tracking App** is a full-stack web application built with the **PERN
 
 The backend is implemented as a *RESTful API* using **Express** and connected to a PostgreSQL database hosted on **Neon**. The frontend is built with **React** and styled with **tailwindcss**.
 
+### Database Schema:
+<img src="./schema.png" />
+
 ## Tools Used For This Project:
 
 <div style="display: flex; align-items: center; flex-wrap: nowrap;">
